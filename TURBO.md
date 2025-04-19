@@ -78,7 +78,7 @@ This is a tricky one and needs dealing with carefully.  Ideally we want a safe s
 Don't forget to update Open and Closed loop tables including the knocking table which should have reduced timing.  
 
 ## Load Targeting - Volumetric Efficiency Load Multiplier
-TODO
+Initially I just added add values that were over 1 and increased as the RPM and load increased, my initial max was about 1.4.  This table will be revisited once we get into boost tuning.  It is this table we need to work on to get our target AFRs aligned with what is actually happening in the engine.
 
 ## Fueling
 Fueling now becomes a matter of setting our AFR targets, however be warned putting the right values in the able does not mean they will be met when driving!!  We need to do much logging and adjustments first.
@@ -90,6 +90,8 @@ This table is important to get right as the AFRs are what we will be targeting a
 
 ### Open Loop WOT AFR Target 2 and 3
 Only the lower portion of this table should be being used.  Again set up the AFRs you want to target.  Remember these AFRs may not be hit until more tuning is done on the road.
+
+## Remember only change one thing at once past this point.
 
 ## Tuning Part 1 - MAF Calibration
 If you were not able to calibrate your MAF before bolting on your turbo, then this is first thing to do.  This will need doing by driving, logging, adjusting repeat.
@@ -108,10 +110,26 @@ Generally we need to start a low boost, capture logs, adjust and build up the bo
 You don't need to be doing WOT runs at this point, I found I could stay below 4000rpm here, consider setting the rev limiter if needed.
 
 ### AFRs
-It is unlikely you are hitting your target AFRs in boost.  This is where the Injector BARO MAP Delta Compensation table comes in.  We can adjust the injector pulse width when in boost by change the values.  In my case I was too lean, so I increased the multiplier until I was hitting my target AFRs.  Again, this a matter of logging, adjusting, logging adjusting.  
+It is unlikely you are hitting your target AFRs in boost.  This is where the Injector BARO MAP Delta Compensation and Volumetric Efficiency Load Multiplier tables comes in.  
+
+We can think of BARO Map Delta Compensation as broad AFR changes across the RPM range for a given boost, so for example, once you get to WOT runs, if you AFR is below your target across the rev range, this table is probably a good place to make adjustments.
+
+We can think of Volumetric Efficiency Load Multiplier as tuning individual load sights, for example if you have a dip in AFR on a WOT pull, but it is otherwise good, an adjustment to this table in the right cell would be the approach to correct that.
+
+We can adjust the injector pulse width when in boost by change the values.  In my case I was too lean, so I increased the multiplier until I was hitting my target AFRs.  Again, this a matter of logging, adjusting, logging adjusting.  
 
 ### Knock
 If you see knock, I would recommend taking timing out at the appropriate load/rpm cell until the fueling is sorted, you can always try adding it back in once the fueling is sorted.
 
 ## So Far
 Hopefully at this point your car is driving pretty well, you can accelerate nicely on part throttle, the AFRs are good and you have no knock.  Now what about WOT.  That is to do next.
+
+## Tuning Part 3 - WOT
+Hopefully by this point you have gotten to a point where your AFRs are looking ok and you don't have any knock.  Based on your experience so far, you need to make a decision as to whether it is safe to do WOT runs.  I started, only pulling from 2000 - 4000 rpm, logging, correcting, then 2000-5000 rpm and so on.  
+
+At this point don't worry if your AFR is not matching your target, just make sure it is a safe AFR for the boost you are running.  Once we have WOT ok through the rev range, we can come back and adjust the tune to get the target AFR aligned to what is happening.  Use the information above in the AFR section to guide you.
+
+### My Example
+When I got to this point, I had lambda 0.76 across the rev range at WOT and no knock.  My target AFR table was 0.73, which is way rich, but I was shooting for safe AFRs.  I now want to converge my targets with reality.  Given I have a stable AFR across the rev range, I will initially add to the BARO compensation at -50, because I am seeing 150kpa at max boost.  This should increase the fueling.  Next I will reduce the AFR targets a little.  I will iterate on this to try and get my target to match reality.  Once it matches, I will then set my targets for real and check by logging.  
+
+You may have to repeat the above for different boost levels to try and dial it in, which will be tricky.  You might need a boost gauge for this.  Using a long hill my help also gather more data points per load sight.
