@@ -5,11 +5,13 @@ Process of tuning my MX5 NC with versatuner.
 
 This is the process that I followed to turbo my MX5 NC.  This is all about the tuning.  There are heaps of youtube videos on how to install the hardware, but very little on how to tune the factory ECU.
 
-For this guide I will be using VersaTuner.  I selected VersaTuner because it is a relative cost effective option in comparison to something like EcuTek.  
+For this guide I will be using VersaTuner.  I selected VersaTuner because it is a relative cost effective option in comparison to something like EcuTek. 
+
+I would recommend getting something like MegaLogViewerHD or another log visualisation tool that can do histograms, so you can look at things like AFR plotted for RPM and Load.  You will absolutely need this for most of the tuning we are doing.
 
 ## The hardware
 
-These are the main hardware components I am using.  NOTE - if you are following this guide DO NOT install everything.
+These are the main hardware components I am using.  NOTE - if you are following this guide DO NOT install everything immediately.
 
 - Kracken exhaust manifold and downpipe
 - pulsar 2860 turbo
